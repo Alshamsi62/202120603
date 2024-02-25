@@ -1,0 +1,80 @@
+class Passenger:
+    def __init__(self, name, seat_number, destination, flight_number, boarding_time):
+        self.name = name
+        self.seat_number = seat_number
+        self.destination = destination
+        self.flight_number = flight_number
+        self.boarding_time = boarding_time
+
+    def get_name(self):
+        return self.name
+
+    def get_seat_number(self):
+        return self.seat_number
+
+    def get_destination(self):
+        return self.destination
+
+    def get_flight_number(self):
+        return self.flight_number
+
+    def get_boarding_time(self):
+        return self.boarding_time
+
+
+class BoardingPass:
+    def __init__(self, passenger, boarding_date, gate_number, seat_assignment, bar_code):
+        self.passenger = passenger
+        self.boarding_date = boarding_date
+        self.gate_number = gate_number
+        self.seat_assignment = seat_assignment
+        self.bar_code = bar_code
+
+    def get_passenger(self):
+        return self.passenger
+
+    def get_boarding_date(self):
+        return self.boarding_date
+
+    def get_gate_number(self):
+        return self.gate_number
+
+    def get_seat_assignment(self):
+        return self.seat_assignment
+
+    def get_bar_code(self):
+        return self.bar_code
+
+
+class BoardingPassSystem:
+    def generate_boarding_pass(self, passenger):
+        boarding_date = "2024-02-25" 
+        gate_number = "C11"  
+        seat_assignment = "A1" 
+        bar_code = "BBC661" 
+        return BoardingPass(passenger, boarding_date, gate_number, seat_assignment, bar_code)
+
+    def modify_boarding_pass(self, boarding_pass, new_seat_assignment, new_boarding_time):
+        boarding_pass.seat_assignment = new_seat_assignment
+        boarding_pass.get_passenger().boarding_time = new_boarding_time
+        return boarding_pass
+
+
+class DisplaySystem:
+    def display_boarding_pass(self, boarding_pass):
+        print(f"Boarding Pass Details:\n{boarding_pass.get_passenger().get_name()}, "
+              f"Seat: {boarding_pass.get_seat_assignment()}, Gate: {boarding_pass.get_gate_number()}, "
+              f"Boarding Time: {boarding_pass.get_passenger().get_boarding_time()}")
+
+passenger = Passenger("Rashed Alshamsi", "C11", "Dubai", "BBC661", "12:00 AM")
+
+boarding_pass_system = BoardingPassSystem()
+boarding_pass = boarding_pass_system.generate_boarding_pass(passenger)
+
+display_system = DisplaySystem()
+display_system.display_boarding_pass(boarding_pass)
+
+new_seat_assignment = "C11"
+new_boarding_time = "12:20"
+modified_boarding_pass = boarding_pass_system.modify_boarding_pass(boarding_pass, new_seat_assignment, new_boarding_time)
+display_system.display_boarding_pass(modified_boarding_pass)
